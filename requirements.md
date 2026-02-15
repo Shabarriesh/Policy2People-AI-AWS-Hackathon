@@ -579,10 +579,11 @@ This positions the system as a **Policy Reasoning Engine**, not a chatbot interf
 
 ## Document Control
 
-Version: 1.0
-Created: 15-02-2026
-Status: Final – Hackathon Idea Submission
-Next Steps: Prototype development and validation
+- Version: 1.0
+- Created: 15-02-2026
+- Status: Final – Hackathon Idea Submission
+- Next Steps: Prototype development and validation
+
 
 
 
