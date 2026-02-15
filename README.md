@@ -1,10 +1,12 @@
-Policy2People AI 🇮🇳  
-AI-Powered Government Scheme Eligibility Reasoning Engine  
+# Policy2People AI 🇮🇳  
+## AI-Powered Government Scheme Eligibility Reasoning Engine
 
 Bridging the gap between complex public policies and Indian citizens through explainable Generative AI built on AWS.
 
 
-The Problem
+---
+
+## The Problem
 
 Millions of eligible Indian citizens miss out on government welfare schemes because policy information is complex, scattered, and difficult to interpret.
 
@@ -12,12 +14,14 @@ Millions of eligible Indian citizens miss out on government welfare schemes beca
 • Eligibility rules are multi-layered and conditional  
 • Information is spread across multiple portals  
 • Systems are static and rule-based  
-• There is limited multilingual personalization  
+• Limited multilingual personalization  
 
 Most platforms provide scheme descriptions — but not personalized eligibility reasoning.
 
 
-Our Solution
+---
+
+## Our Solution
 
 Policy2People AI is a semantic policy reasoning engine that:
 
@@ -28,42 +32,54 @@ Policy2People AI is a semantic policy reasoning engine that:
 • Identifies missing documents  
 • Provides multilingual responses  
 
-This is not a chatbot.  
+This is not just a chatbot.  
 It is an AI-powered eligibility reasoning system designed for public impact.
 
 
-How It Works
+---
+
+## How It Works
 
 1. Government scheme PDFs are stored in Amazon S3  
-2. Amazon Textract extracts text from policy documents  
-3. Eligibility metadata is structured and stored in DynamoDB  
+2. Amazon Textract extracts structured text  
+3. Eligibility metadata is stored in DynamoDB  
 4. A citizen submits their profile or query  
 5. AWS Lambda processes the request  
 6. Amazon Bedrock performs semantic reasoning  
 7. The system generates explainable results  
-8. Amazon Translate converts output to the selected language (if required)  
+8. Amazon Translate returns output in the chosen language  
 
 
-Confidence Score Logic
+---
 
-Confidence is calculated based on how many eligibility conditions are satisfied and the strength of contextual match.
+## Confidence Score Logic
 
-• 80–100% → High Confidence  
-• 60–79% → Moderate Confidence  
-• 40–59% → Low Confidence  
-• Below 40% → Not Recommended  
+Confidence is calculated based on how many eligibility conditions are satisfied and the clarity of match.
+
+• 90–100% → High Confidence  
+• 70–89% → Medium Confidence  
+• Below 70% → Low Confidence  
+
+Confidence adjusts based on:
+
+• Matched vs unmatched criteria  
+• Missing critical information  
+• Borderline threshold values  
+• Ambiguous policy wording  
 
 
-Example Input and Output
+---
 
-Example 1 – Rural Farmer
+## Example Input and Output
 
-Input:
+### Example 1 – Rural Farmer
+
+**Input:**  
 "I am a 32-year-old woman farmer from Karnataka earning 1.8 lakh per year."
 
-Output:
+**Output:**
 
-ELIGIBLE for PM-KISAN  
+Eligible for PM-KISAN  
 Confidence Score: 92% (High)
 
 Matched Criteria:
@@ -80,18 +96,20 @@ Required Documents:
 Rejection Risk: Low
 
 
-Example 2 – Urban Youth
+---
 
-Input:
+### Example 2 – Urban Youth
+
+**Input:**  
 "I am a 24-year-old graduate from Mumbai and currently unemployed."
 
-Output:
+**Output:**
 
-ELIGIBLE for Skill Development Schemes  
+Eligible for Skill Development Schemes  
 Confidence Score: 84% (High)
 
-PARTIALLY ELIGIBLE for Startup India  
-Confidence Score: 61% (Moderate)
+Partially Eligible for Startup India  
+Confidence Score: 61% (Medium)
 
 Missing Requirement:
 • Business registration  
@@ -102,61 +120,69 @@ Alternative Suggestions:
 • MUDRA Yojana  
 
 
-AWS Architecture
+---
 
-The solution is designed using a serverless and scalable AWS architecture:
+## AWS Architecture
+
+The solution uses a serverless, scalable AWS architecture:
 
 User → Amazon API Gateway → AWS Lambda →  
 Amazon DynamoDB + Amazon S3 → Amazon Bedrock → Response  
 
-Core AWS Services Used:
+Core AWS Services:
 
 • Amazon Bedrock – Generative AI reasoning  
-• Amazon Textract – Policy document text extraction  
-• Amazon S3 – Secure document storage  
-• Amazon DynamoDB – Structured eligibility metadata  
-• AWS Lambda – Serverless backend logic  
+• Amazon Textract – Policy extraction  
+• Amazon S3 – Document storage  
+• Amazon DynamoDB – Eligibility metadata  
+• AWS Lambda – Serverless backend  
 • Amazon API Gateway – REST API interface  
-• Amazon Translate – Multilingual support  
+• Amazon Translate – Multilingual output  
 • AWS IAM – Access control  
-• Amazon CloudWatch – Monitoring and logging  
+• Amazon CloudWatch – Monitoring  
 
 
-Why AI Instead of Rules?
+---
 
-Government policies often contain:
+## Why AI Instead of Hardcoded Rules?
+
+Government policies contain:
 
 • Nested eligibility conditions  
 • Context-based interpretations  
 • Conditional clauses  
-• Exceptions and preferences  
+• Exceptions and preference rules  
 
-Traditional systems rely on static filtering logic.  
+Traditional rule systems grow exponentially in complexity.
 
-Policy2People AI uses semantic reasoning via Large Language Models to interpret policy language contextually.
+Policy2People AI uses semantic reasoning through LLMs to interpret policy text contextually instead of relying on rigid rule trees.
 
-The system ensures explainability by showing:
+The system provides:
 
-• Which criteria were matched  
-• Which were not matched  
-• Confidence score  
-• Risk indication  
+• Matched criteria  
+• Unmatched criteria  
+• Clear explanations  
+• Confidence scores  
 
 
-Responsible AI Approach
+---
 
-Bias Mitigation  
-The system avoids discrimination based on gender, caste, religion, or region.
+## Responsible AI Approach
 
-Transparency  
-Every recommendation includes reasoning and confidence scoring.
+### Bias Mitigation
+Designed to avoid discrimination based on gender, caste, religion, or region.
 
-Privacy  
+### Transparency
+Every recommendation includes explanation and confidence scoring.
+
+### Privacy
 No long-term storage of sensitive personal data.  
 Minimal data retention principles are followed.
 
 
-Scalability and Security
+---
+
+## Scalability and Security
 
 • Fully serverless AWS architecture  
 • Auto-scaling managed services  
@@ -165,25 +191,31 @@ Scalability and Security
 • HTTPS endpoints via API Gateway  
 
 
-Expected Impact
+---
 
-• Improved welfare scheme accessibility  
-• Reduced rejection due to confusion  
-• Multilingual inclusion for Bharat-scale reach  
-• Reduced reliance on intermediaries  
-• Increased policy transparency  
+## Expected Impact
 
-
-Current Status
-
-This repository contains the conceptual architecture, AI workflow design, and documentation prepared for the AI for Bharat Hackathon.
-
-The system is designed for deployment using a secure and scalable AWS cloud-native architecture.
+• Improves scheme awareness and accessibility  
+• Reduces incorrect or rejected applications  
+• Enables multilingual inclusion at Bharat scale  
+• Reduces dependency on intermediaries  
+• Increases transparency in welfare access  
 
 
-Team
+---
 
-AI Bharath CloudForge
+## Current Status
+
+This repository contains the conceptual architecture and documentation prepared for the AI for Bharat Hackathon.
+
+The system is designed for deployment using a secure, scalable AWS cloud-native architecture.
+
+
+---
+
+## Team
+
+### AI Bharath CloudForge
 
 Shabarriesh Arjarapu – Team Lead  
 K Pavan Kumar – AWS Architecture & Backend  
