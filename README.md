@@ -217,7 +217,7 @@ The system is designed for deployment using a secure, scalable AWS cloud-native 
 
 ### AI Bharath CloudForge
 
-Shabarriesh Arjarapu – Team Lead  
-K Pavan Kumar – AWS Architecture & Backend  
-Punitha Rani – AI & Documentation  
+Punitha Rani – Team Lead   
+Shabarriesh Arjarapu – AI & Documentation  
+K Pavan Kumar – AWS Architecture & Backend 
 B Kushwanth Sai – Frontend & System Design  
