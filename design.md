@@ -263,45 +263,63 @@ The extracted text is passed to Bedrock with a structured prompt:
 
 **Prompt Template**:
 ```
-You are a policy analyst extracting eligibility criteria from government scheme documents.
+You are a policy analyst extracting structured eligibility criteria from government scheme documents.
+
+Your task is to analyze the provided policy text and extract information in STRICT JSON format.
+
+Do not include any explanations, commentary, markdown, or additional text.
+Return ONLY valid JSON.
 
 Document Text:
 {extracted_text}
 
-Extract the following information in JSON format:
-1. Scheme Name
-2. Scheme Description (2-3 sentences)
-3. Eligibility Criteria (structured as conditions):
-   - Age requirements (min, max, or range)
-   - Income requirements (threshold, category)
-   - Gender requirements (if any)
-   - Location requirements (state, district, rural/urban)
-   - Occupation requirements (farmer, student, entrepreneur, etc.)
-   - Category requirements (SC/ST/OBC/General)
-   - Other conditions (nested or complex)
-4. Required Documents (list)
-5. Benefits Provided
-6. Application Process (brief)
-7. Validity Period
+Extract the following fields:
+
+1. scheme_name
+2. description (2-3 sentence summary)
+3. eligibility:
+   - age (min, max, or null)
+   - income (max, min, unit, or null)
+   - gender (male/female/any/null)
+   - location (states list, district list, rural/urban/null)
+   - occupation (array or null)
+   - category (SC/ST/OBC/General/any/null)
+   - additional_conditions (array or empty array)
+4. required_documents (array)
+5. benefits (string or null)
+6. application_process (string or null)
+7. validity (string or null)
+
+Rules:
+- If a field is not specified in the document, set it to null.
+- Do not invent information.
+- Preserve numeric thresholds exactly as written.
+- Return only properly formatted JSON.
 
 Output Format:
+
 {
-  "scheme_name": "...",
-  "description": "...",
+  "scheme_name": "",
+  "description": "",
   "eligibility": {
-    "age": {"min": 18, "max": 35},
-    "income": {"max": 200000, "unit": "INR/year"},
+    "age": {"min": null, "max": null},
+    "income": {"min": null, "max": null, "unit": "INR/year"},
     "gender": "any",
-    "location": {"states": ["Karnataka"], "area_type": "rural"},
-    "occupation": ["farmer"],
-    "category": ["SC", "ST"],
-    "additional_conditions": ["Must not be receiving other agricultural subsidies"]
+    "location": {
+      "states": [],
+      "districts": [],
+      "area_type": null
+    },
+    "occupation": [],
+    "category": [],
+    "additional_conditions": []
   },
-  "required_documents": [...],
-  "benefits": "...",
-  "application_process": "...",
-  "validity": "..."
+  "required_documents": [],
+  "benefits": null,
+  "application_process": null,
+  "validity": null
 }
+
 ```
 
 **Step 4: Metadata Storage in DynamoDB**
